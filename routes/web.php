@@ -50,7 +50,7 @@ Route::get('/',HomePage::class)->name('home.page');
 Route::get('/product/{id}', ProductDetails::class)->name('product.details');
 
 
-Route::get('/cart', CartPage::class)->name('cart')->middleware('auth');
+Route::get('/cart', CartPage::class)->name('cart');
 
 
 Route::get('/order/{order}', OrderDetails::class)->name('order.details');
@@ -67,7 +67,7 @@ Route::get('/admins/add', AdminAdd::class)->name('admins.add');
 
 
 require __DIR__.'/auth.php';
-require __DIR__.'/api.php';
+// require __DIR__.'/api.php';
 
 
 

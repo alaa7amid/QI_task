@@ -18,9 +18,12 @@ return Application::configure(basePath: dirname(__DIR__))
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ]);
+
+
+        // $middleware->alias([
+        //     'admin' => App\Http\Middleware\CheckAdmin::class,
+        // ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
-
-    

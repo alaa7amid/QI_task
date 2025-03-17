@@ -16,15 +16,15 @@ class DashboardPage extends Component
     public function mount()
     {
         
-        if (Auth::check()) {
-            if (Auth::user()->role != 1) {
+        // if (Auth::check()) {
+        //     if (Auth::user()->role != 1) {
               
-                return redirect()->route('home.page');
-            }
-        } else {
+        //         return redirect()->route('home.page');
+        //     }
+        // } else {
             
-            return redirect()->route('login');
-        }
+        //     return redirect()->route('login');
+        // }
 
         
         $this->userCount = User::count(); 
