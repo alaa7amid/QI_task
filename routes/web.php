@@ -67,4 +67,7 @@ Route::get('/admins/add', AdminAdd::class)->name('admins.add');
 
 
 require __DIR__.'/auth.php';
+require __DIR__.'/api.php';
+
+
 

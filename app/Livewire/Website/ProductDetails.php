@@ -27,7 +27,7 @@ class ProductDetails extends Component
             ];
         }
         Session::put('cart',$this->cart);
-        session()->flash('success', 'تم إضافة المنتج إلى السلة!');
+        session()->flash('success', 'add products to cart!');
 
     }
 

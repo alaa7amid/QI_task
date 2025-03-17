@@ -17,7 +17,7 @@ class ProductsEdit extends Component
     public $description;
     public $image;
 
-    // تحميل البيانات بناءً على الـ ID
+   
     public function mount($productId)
     {
         $this->productId = $productId;
@@ -28,7 +28,7 @@ class ProductsEdit extends Component
         $this->image = $product->image;
     }
 
-    // دالة التحديث
+   
     public function updateProduct()
     {
         $product = Product::find($this->productId);
@@ -36,9 +36,9 @@ class ProductsEdit extends Component
         $product->price = $this->price;
         $product->description = $this->description;
 
-        // إذا كان هناك صورة جديدة، قم بتحديثها
+        
         if ($this->image) {
-            // إذا كانت هناك صورة جديدة، قم بتخزينها
+            
             $imagePath = $this->image->storePublicly('product_images', 'public');
             $product->image = $imagePath;
         }
@@ -46,7 +46,7 @@ class ProductsEdit extends Component
         $product->save();
 
         session()->flash('success', 'Product updated successfully!');
-        return redirect()->route('products'); // إعادة التوجيه لقائمة المنتجات بعد التحديث
+        return redirect()->route('products'); 
     }
 
     public function render()

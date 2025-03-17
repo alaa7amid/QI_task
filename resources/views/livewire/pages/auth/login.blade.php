@@ -14,41 +14,49 @@ new #[Layout('layouts.guest')] class extends Component
      */
     public function login(): void
     {
-        $this->validate();
+        // التحقق من البيانات
+        $this->validate([
+            'form.email' => 'required|email',
+            'form.password' => 'required|min:8',
+        ]);
 
+        // محاولة التوثيق
         $this->form->authenticate();
 
+        // تجديد الجلسة بعد التوثيق
         Session::regenerate();
 
-        $this->redirectIntended(default: route('dashboard.page', absolute: false), navigate: true);
+        // التوجيه إلى الصفحة المحددة
+        $this->redirectIntended(route('dashboard.page', [], false), navigate: true);
     }
-}; ?>
+};
+
+?>
 
 <div> 
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form wire:submit="login">
-        <!-- Email Address -->
+    <!-- نموذج الدخول -->
+    <form wire:submit.prevent="login">
+        <!-- حقل البريد الإلكتروني -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
         </div>
 
-        <!-- Password -->
+        <!-- حقل كلمة المرور -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
-
             <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
                             required autocomplete="current-password" />
-
             <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
         </div>
 
-        <!-- Remember Me -->
+        <!-- خيار "تذكرني" -->
         <div class="block mt-4">
             <label for="remember" class="inline-flex items-center">
                 <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">

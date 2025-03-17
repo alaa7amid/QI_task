@@ -23,7 +23,7 @@ class CartPage extends Component
                 'name' => $product->name,
                 'price' => $product->price,
                 'quantity' => $item['quantity'],
-                'image' => $product->image ?? 'default-image.jpg', // ✅ صورة افتراضية في حال عدم وجود صورة
+                'image' => $product->image ?? 'default-image.jpg', 
             ];
         })->toArray();
     }
@@ -39,30 +39,30 @@ class CartPage extends Component
                 'name' => $product->name,
                 'price' => $product->price,
                 'quantity' => 1,
-                'image' => $product->image ?? 'default-image.jpg', // ✅ التأكد من وجود صورة
+                'image' => $product->image ?? 'default-image.jpg', 
             ];
         }
 
         Session::put('cart', $this->cart);
-        session()->flash('success', 'تم إضافة المنتج إلى السلة!');
+        session()->flash('success', ' add product to cart');
     }
 
     public function removeFromCart($productId){
         if(isset($this->cart[$productId])){
             unset($this->cart[$productId]);
             Session::put('cart', $this->cart);
-            session()->flash('success', 'تم إزالة المنتج من السلة!');
+            session()->flash('success', 'remove product from cart!');
         }
     }
 
     public function checkout(){
         if (empty($this->cart)) {
-            session()->flash('error', 'السلة فارغة!');
+            session()->flash('error', ' empty cart!');
             return;
         }
 
         if (!$this->address) {
-            session()->flash('error', 'يرجى إدخال عنوان التوصيل!');
+            session()->flash('error', ' enter your address!');
             return;
         }
 
@@ -86,7 +86,7 @@ class CartPage extends Component
         Session::forget('cart');
         $this->cart = [];
         session()->flash('success', 'تم إتمام الطلب بنجاح!');
-        return redirect()->route('order.details', ['order' => $order->id]); // ✅ التوجيه إلى صفحة الطلب بعد الإتمام
+        return redirect()->route('order.details', ['order' => $order->id]); 
     }
 
     public function render()

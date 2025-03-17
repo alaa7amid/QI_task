@@ -11,7 +11,7 @@ class ProductsShow extends Component
 
     public function mount($id)
     {
-        // جلب المنتج من قاعدة البيانات بناءً على الـ ID
+        
         $this->product = Product::findOrFail($id);
     }
 

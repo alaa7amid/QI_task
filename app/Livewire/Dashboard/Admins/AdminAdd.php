@@ -13,7 +13,7 @@ class AdminAdd extends Component
     public $email;
     public $password;
     public $password_confirmation;
-    public $role = 0; // قيمة افتراضية 0 (ليس أدمن)
+    public $role = 0; 
 
     protected $rules = [
         'name' => 'required|string|max:255',
@@ -25,7 +25,7 @@ class AdminAdd extends Component
 
     public function updatedRole($value)
     {
-        // إذا تم تفعيل الجك بوكس، سيتم تعيين القيمة 1، وإذا لم يتم تفعيله سيتم تعيين القيمة 0
+       
         $this->role = $value ? 1 : 0;
     }
     
@@ -33,17 +33,17 @@ class AdminAdd extends Component
     {
         $this->validate();
     
-        // إضافة الأدمن
+        
         User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
-            'role' => $this->role, // تعيين دور الأدمن بناءً على القيمة
+            'role' => $this->role, 
         ]);
     
         session()->flash('success', 'Admin added successfully!');
     
-        // إعادة تعيين الحقول
+      
         $this->reset(['name', 'email', 'password', 'password_confirmation', 'role']);
     }
     
